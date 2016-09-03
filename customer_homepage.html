@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  </head>
+  <body style="background: #c1bdba" onload="load_data()">
+    <div class="form" style="max-width:1200px">
+        <div class="container" style="padding-right:60px">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Customer</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a><b>Welcome!</b></a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="customer_name">
+                      Customer<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="customer_edit_profile.html">
+                            Edit Profile
+                        </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="python/customer_logout.py">
+                            Logout
+                        </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="jumbotron">
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#ride_now">Ride Now!</a></li>
+              <li><a id="tb_ride_history" data-toggle="tab" href="#ride_history">History</a></li>
+            </ul>
+
+            <div class="tab-content">
+              <div id="ride_now" class="tab-pane fade in active">
+                <h3>&nbsp;</h3>
+                  <form name="fm_truck_list" id="fm_truck_list" action="python/truck_list.py" method="post">
+                  <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 pull-left">
+                            <div class="btn-group">
+                                <select class="form-control" id="type" name="type" style="width: 140px">
+                                  <option value="TYPE">Truck Type</option>
+                                  <option value="SCOOTY">Minivan</option>
+                                  <option value="BIKE">Sport utility vehicle</option>
+                                  <option value="CAR">Canopy express</option>
+                                  <option value="CAR">Pickup truck</option>
+                                  <option value="CAR">Panel truck</option>
+                                  <option value="CAR">Cab-forward</option>
+                                  <option value="CAR">Tow truck</option>
+                                  <option value="CAR">Panel van</option>
+                                  <option value="CAR">Sedan delivery</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                              <span class="input-group-addon" id="sizing-addon2">Source</span>
+                              <input type="text" class="form-control" placeholder="Enter Location" aria-describedby="sizing-addon2" id="source" name="source" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                              <span class="input-group-addon" id="sizing-addon2">Destination</span>
+                              <input type="text" class="form-control" placeholder="Enter Location" aria-describedby="sizing-addon2" id="destination" name="destination" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group" role="group" aria-label="...">
+                              <button type="submit" class="btn btn-default" style="width: 140px">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  </form>
+                  <h3>&nbsp;</h3>
+                    <div id="truck_list_msg">Available Trucks</div>
+                    <table id="table_truck_result" class=table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Truck</th>
+                                <th>Vehicle Type</th>
+                                <th>Vehicle Name</th>
+                                <th>Mileage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results">
+                            <tr>
+                                <th scope=row>1</th>
+                                <td>admin</td>
+                                <td>Sedan</td>
+                                <td>Maruti Swift</td>
+                                <td>24.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-default" style="width: 140px" id="book_ride">Book Ride</button>
+              </div>
+              <div id="ride_history" class="tab-pane fade">
+                <h3>&nbsp;</h3>
+                <div id="customer_history_msg"><p>Summary of undertaken rides</p></div>
+                <table id="table_customer_history"class=table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Truck</th>
+                            <th>Date</th>
+                            <th>Source</th>
+                            <th>Destination</th>
+                            <th>Up Time</th>
+                            <th>Down Time</th>
+                            <th>Distance</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope=row>1</th>
+                            <td>admin</td>
+                            <td>01-JAN-16</td>
+                            <td>Esplanade</td>
+                            <td>Ultadanga</td>
+                            <td>02:00</td>
+                            <td>04:00</td>
+                            <td>14.02</td>
+                            <td>256.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+              <div id="menu2" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+              </div>
+            </div>
+        </div>
+        </div>
+    </div>
+   <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        $("#fm_truck_list").submit(function(e){
+            var type = $('#type').val();
+            var source = $('#source').val();
+            var destination = $('#destination').val();
+            var formURL = $(this).attr("action");
+            var data = {
+                            type:type,
+                            source:source,
+                            destination:destination
+            }
+            $.ajax({
+                    url : formURL,
+                    type: "POST",
+                    data : data,
+                    dataType: 'json',
+                    success: function (data) {
+                                         if(data!=''){
+                                            $("#table_truck_result tbody > tr").remove();
+                                            $('#truck_list_msg').html(data.length+' records found');
+                                            for(var i=0;i<data.length;i++){
+                                                $('#table_truck_result > tbody:last-child').append('<tr><td>'+(i+1)+'</td><td>'+data[i][0]+'</td><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>');
+                                            };
+                                         }else{
+                                             $('#truck_list_msg').html('no records found');
+                                             $("#table_truck_result tbody > tr").remove();
+                                         }
+                                    }
+                });
+                e.preventDefault();
+        });
+        $('#tb_ride_history').click(function(e){
+            var cid = '0';
+            var formURL = 'python/customer_history.py';
+            var data = {
+                cid:cid
+            }
+            $.ajax({
+                    url : formURL,
+                    type: "POST",
+                    data : data,
+                    dataType: 'json',
+                    success: function (data) {
+                                         if(data!=''){
+                                            $("#table_customer_history tbody > tr").remove();
+                                            $('#customer_history_msg').html(data.length+' records found');
+                                            for(var i=0;i<data.length;i++){
+                                                $('#table_customer_history > tbody:last-child').append('<tr><td>'+(i+1)+'</td><td id="truck_name">'+data[i][0]+'</td><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td><td>'+data[i][4]+'</td><td>'+data[i][5]+'</td><td>'+data[i][6]+'</td><td>'+data[i][7]+'</td></tr>');
+                                            };
+                                         }else{
+                                             $('#customer_history_msg').html('no records found');
+                                             $("#table_customer_history tbody > tr").remove();
+                                         }
+                                    }
+            });
+            e.preventDefault();
+         })
+        function load_data() {
+            var type = 'cid';
+            var formURL = 'python/sessions_fetch.py';
+            var data = {
+                type:type
+            }
+            $.ajax({
+                    url : formURL,
+                    type: "POST",
+                    data : data,
+                    dataType: 'json',
+                    success: function (data) {
+                                         if(data!=''){
+                                             //alert(data[0]);
+                                            $('#customer_name').html(''+data[0]+'<span class="caret"></span>');
+                                         }
+                                         else
+                                             alert('Couldn\'t fetch Customer Name');
+                                    }
+            });
+        }
+        $('#book_ride').click(function(e){
+            var sts=-1;
+            var truck_name = document.getElementsByTagName("TD")[1].textContent.trim();
+            var customer_name = document.getElementsByTagName("A")[2].textContent.trim();
+            var source = $('#source').val();
+            var destination = $('#destination').val();
+            var formURL = 'python/ride_book.py';
+            var data = {
+                truck_name:truck_name,
+                customer_name:customer_name,
+                source:source,
+                destination:destination
+            }
+            $.ajax({
+                    url : formURL,
+                    type: "POST",
+                    data : data,
+                    dataType: 'json',
+                    success: function (data) {
+                                         if(data==1){
+                                             alert('Truck has been requested');
+                                             $('#book').html('Cancel Ride');
+                                             sts=1;
+                                         }else{
+                                            alert('Error Occurred');
+                                         }
+                                    }
+            });
+            e.preventDefault();
+         })
+      </script>
+  </body>
+</html>

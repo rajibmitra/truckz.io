@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Truck Registration</title>
+    <link rel="stylesheet" href="css/truck_register_style.css">
+</head>
+<body class="align">
+
+  <div class="site__container">
+    <div class="grid__container">
+      <form id="fm_truck_register" name="fm_truck_register" action="python/truck_register.py" method="post" class="form form--login">
+
+        <div class="form__field">
+          <label for="login__username"><span class="hidden">Registration No</span></label>
+          <input name="reg_no" id="reg_no" type="text" class="form__input" placeholder="Registration No" required>
+        </div>
+
+        <div class="form__field">
+          <label for="login__username"><span class="hidden">Type</span></label>
+          <input name="type" id="type" type="text" class="form__input" placeholder="Type" required>
+        </div>
+
+        <div class="form__field">
+          <label for="login__username"><span class="hidden">Truck Name</span></label>
+          <input name="name" id="name" type="text" class="form__input" placeholder="Truck Name" required>
+        </div>
+
+        <div class="form__field">
+          <label for="login__username"><span class="hidden">Mileage</span></label>
+          <input name="cost_per_km" id="cost_per_km" type="text" class="form__input" placeholder="Mileage" required>
+        </div>
+
+        <div class="form__field">
+          <input type="submit" value="Get Registered">
+        </div>
+
+      </form>
+    </div>
+  </div>
+    <script src='js/jquery.min.js'></script>
+    <script>
+        $("#fm_truck_register").submit(function(e){
+            var reg_no = $('#reg_no').val();
+            var type = $('#type').val();
+            var name = $('#name').val();
+            var cost_per_km = $('#cost_per_km').val();
+            var formURL = $(this).attr("action");
+            var data = {
+                            reg_no:reg_no,
+                            type:type,
+                            name:name,
+                            cost_per_km:cost_per_km
+            }
+            $.ajax({
+                    url : formURL,
+                    type: "POST",
+                    data : data,
+                    dataType: 'json',
+                    success: function (data) {
+                                         if(data[0]==1){
+                                             alert('Truck registered with Truck ID: '+data[1])
+                                             $("#fm_truck_register")[0].reset();
+                                         }
+                                         else
+                                             alert('Truck registered failed')
+                                    }
+                });
+                e.preventDefault();
+        });
+    </script>
+</body>
+</html>

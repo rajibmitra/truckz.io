@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="form">
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="signup">
+          <h1>Sign Up for Free</h1>
+          <form name="fm_customer_register" id="fm_customer_register" action="python/customer_register.py" method="post">
+          <div class="field-wrap">
+            <label>
+              Name<span class="req">*</span>
+            </label>
+            <input type="text"  autocomplete="off" name="name" id="name"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Gender (M/F)<span class="req">*</span>
+            </label>
+            <input type="text" autocomplete="off" name="gender" id="gender">
+          </div>
+          <div class="field-wrap">
+            <label>
+              Date Of Birth (DD-MON-YYYY)<span class="req">*</span>
+            </label>
+            <input type="text"  autocomplete="off" name="dob" id="dob"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Mobile<span class="req">*</span>
+            </label>
+            <input type="text" required autocomplete="off" name="mobile" id="mobile"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Email<span class="req">*</span>
+            </label>
+            <input type="email" required autocomplete="off" name="email" id="email"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Address<span class="req">*</span>
+            </label>
+            <input type="text" required autocomplete="off" name="address" id="address"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Set A Password (Max 8 letters)<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="password" id="password"/>
+          </div>
+
+          <button type="submit" class="button button-block"/>Get Started</button>
+
+          </form>
+
+        </div>
+
+        <div id="login">
+          <h1>Welcome Back!</h1>
+
+          <form action="python/customer_login.py" method="post">
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email"required autocomplete="off" name="email"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="password"/>
+          </div>
+
+          <p class="forgot"><a href="customer_forgot.html">Forgot Password?</a></p>
+
+          <button type ="submit" class="button button-block"/>Log In</button>
+
+          </form>
+
+        </div>
+
+      </div><!-- tab-content -->
+
+</div> <!-- /form -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        $("#fm_customer_register").submit(function(e){
+            var name = $('#name').val();
+            var gender = $('#gender').val();
+            var dob = $('#dob').val();
+            var mobile = $('#mobile').val();
+            var email = $('#email').val();
+            var address = $('#address').val();
+            var password = $('#password').val();
+            var formURL = $(this).attr("action");
+            var data = {
+                            name:name,
+                            gender:gender,
+                            dob:dob,
+                            mobile:mobile,
+                            email:email,
+                            address:address,
+                            password:password
+            }
+            $.ajax({
+                    url : formURL,
+                    type: "POST",
+                    data : data,
+                    dataType: 'json',
+                    success: function (data) {
+                                         if(data[0]==1){
+                                             alert('Customer registered with Customer ID: '+data[1]);
+                                             $("#fm_customer_register")[0].reset();
+                                         }
+                                         else
+                                             alert('Customer registered failed');
+                                    }
+                });
+                e.preventDefault();
+        });
+    </script>
+</body>
+</html>
